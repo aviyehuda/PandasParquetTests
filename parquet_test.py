@@ -17,33 +17,33 @@ NON_PARTITIONED_SORTED_PATH=f"{NON_PARTITIONED_PATH_PREFIX}_sorted.parquet"
 ROW_GROUP_SIZE=MIL
 
 
-# print(f"Testing on {NUM_OF_RECORDS} records")
+print(f"Testing on {NUM_OF_RECORDS} records")
 
-# print(f"Creating fake data")
-# data = {
-#     'id': range(NUM_OF_RECORDS),  # Generate IDs from 1 to 100
-#     'name': [fake.name() for _ in range(NUM_OF_RECORDS)],
-#     'age': [fake.random_int(min=18, max=99) for _ in range(NUM_OF_RECORDS)],
-#     'state': [fake.state() for _ in range(NUM_OF_RECORDS)],
-#     'city': [fake.city() for _ in range(NUM_OF_RECORDS)],
-#     'street': [fake.street_address() for _ in range(NUM_OF_RECORDS)]
-# }
+print(f"Creating fake data")
+data = {
+    'id': range(NUM_OF_RECORDS),  # Generate IDs from 1 to 100
+    'name': [fake.name() for _ in range(NUM_OF_RECORDS)],
+    'age': [fake.random_int(min=18, max=99) for _ in range(NUM_OF_RECORDS)],
+    'state': [fake.state() for _ in range(NUM_OF_RECORDS)],
+    'city': [fake.city() for _ in range(NUM_OF_RECORDS)],
+    'street': [fake.street_address() for _ in range(NUM_OF_RECORDS)]
+}
 
-# df = pd.DataFrame(data)
+df = pd.DataFrame(data)
 
 
 
-# print("Creating non partitioned data")
-# df.to_parquet(path=NON_PARTITIONED_PATH)
+print("Creating non partitioned data")
+df.to_parquet(path=NON_PARTITIONED_PATH)
 
-# print("Creating partitioned data")
-# df.to_parquet(path=PARTITIONED_PATH, partition_cols=['state'])
+print("Creating partitioned data")
+df.to_parquet(path=PARTITIONED_PATH, partition_cols=['state'])
 
-# print("Creating non partitioned data and stating the num of row groups")
-# df.to_parquet(path=NON_PARTITIONED_ROW_GROUPS_PATH, row_group_size=ROW_GROUP_SIZE)
+print("Creating non partitioned data and stating the num of row groups")
+df.to_parquet(path=NON_PARTITIONED_ROW_GROUPS_PATH, row_group_size=ROW_GROUP_SIZE)
 
-# print("Creating non partitioned sorted data")
-# df.sort_values("state").to_parquet(path=NON_PARTITIONED_SORTED_PATH, row_group_size=ROW_GROUP_SIZE)
+print("Creating non partitioned sorted data")
+df.sort_values("state").to_parquet(path=NON_PARTITIONED_SORTED_PATH, row_group_size=ROW_GROUP_SIZE)
 
 
 
